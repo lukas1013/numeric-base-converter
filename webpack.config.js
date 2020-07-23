@@ -16,7 +16,7 @@ module.exports = env => ({
 			},
 			{
 				test: /\.html$/,
-				use: 'html-loader']
+				use: ['html-loader']
 			},
 			{
 				test: /\.css$/,
@@ -41,6 +41,7 @@ module.exports = env => ({
 			warnings: true,
 			errors: true
 		},
+		stats: 'minimal',
 		watchContentBase: true
 	},
 	resolve: { 
