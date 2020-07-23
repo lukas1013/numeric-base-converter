@@ -1,0 +1,30 @@
+{
+  "name": "base-converter",
+  "version": "1.0.0",
+  "description": "A numeric base converter made with Reactjs",
+  "private": true,
+  "scripts": {
+    "start": "webpack-dev-server --open --env development",
+    "build": "webpack --mode production"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.6.0",
+    "eslint": "^7.5.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
