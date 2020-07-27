@@ -85,15 +85,23 @@ export default function App() {
 
 	}
 	
+	function convertToDecimal(base, numb) {
+		let res = 0;
+		
+		const numbs = numb.toString().split('').reverse();
+			
+		for (let i = 0; i < numbs.length; i++) {
+			res = res + numbs[i] * base ** i;
+		}
+		
+		return res
+	}
+	
 	function binaryFor(base, numb) {
 		let res = 0;
 		
 		if (base === 10) {
-			const numbs = numb.toString().split('').reverse();
-			
-			for (let i = 0; i < numbs.length; i++) {
-				res = res + numbs[i] * 2 ** i;
-			}
+			res = convertToDecimal(2, numb)
 		}else {
 			res = '';
 			const numbs = [], digits = numb.split('');
