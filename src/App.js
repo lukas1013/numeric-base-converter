@@ -68,7 +68,7 @@ export default function App() {
 				break;
 			
 			case 16:
-				
+				res = hexadecimalFor(forBase, number);
 				break;
 			
 			//2
@@ -182,6 +182,27 @@ export default function App() {
 		
 		if (base === 16) {
 			res = binaryFor(16, res)
+		}
+		
+		return res
+	}
+	
+	function hexadecimalFor(base, numb) {
+		let res;
+		const numbs = numb.split('').map(n => hexSymbols[n] ?? n)
+
+		if (base === 2 || base === 8) {
+			const binaries = numbs.map(n => convertToBinary(n).padStart(4, 0))
+			
+			res = binaries.join('').replace(/^[0]*/, '')
+		}
+		
+		if (base === 10) {
+			res = convertToDecimal(16, numb)
+		}
+		
+		if (base === 8) {
+			res = binaryFor(8, res)
 		}
 		
 		return res
