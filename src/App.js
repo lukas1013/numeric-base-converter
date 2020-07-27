@@ -73,7 +73,7 @@ export default function App() {
 			
 			//2
 			default:
-			
+				res = binaryFor(forBase, number);
 				break;
 		}
 		
@@ -83,6 +83,42 @@ export default function App() {
 		
 		setBase1Value(res)
 
+	}
+	
+	function binaryFor(base, numb) {
+		let res = 0;
+		
+		if (base === 10) {
+			const numbs = numb.toString().split('').reverse();
+			
+			for (let i = 0; i < numbs.length; i++) {
+				res = res + numbs[i] * 2 ** i;
+			}
+		}else {
+			res = '';
+			const numbs = [], digits = numb.split('');
+			const arrayLen = digits.length, relacion = base === 16 ? 4 : 3;
+			
+			while(digits.length > 0) {
+				numbs.unshift(digits.splice(-relacion))
+			}
+			
+			//Array of arrays
+			for (const numArray of numbs) {
+				let result = 0
+				
+				numArray.reverse()
+
+				for (let n = 0; n < numArray.length; n++) {
+					result += numArray[n] * 2 ** n
+				}
+				
+				res = (base === 16 && result > 9) ? res + hexNumbers[result] : res + result;
+				result = 0
+			}
+		}
+		
+		return res
 	}
 	
 	function decimalFor(base, numb) {
