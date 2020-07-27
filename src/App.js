@@ -60,7 +60,7 @@ export default function App() {
 		
 		switch (base) {
 			case 8:
-				
+				res = octalFor(forBase, number);
 				break;
 				
 			case 10:
@@ -83,6 +83,23 @@ export default function App() {
 		
 		setBase1Value(res)
 
+	}
+	
+	function convertToBinary(numb) {
+		let rests = [], quo = numb;
+
+		do {
+			rests.push(quo % 2)
+			
+			quo = parseInt(quo / 2)
+			
+			if (quo < 2 && quo > 0) {
+				rests.push(quo)
+			}
+			
+		} while(quo >= 2)
+		
+		return rests.reverse().join('');
 	}
 	
 	function convertToDecimal(base, numb) {
@@ -145,6 +162,28 @@ export default function App() {
 		} while(quo >= base)
 		
 		return rests.reverse().join('');
+	}
+	
+	function octalFor(base, numb) {
+		let res = ''
+		
+		if (base === 10) {
+			res = convertToDecimal(8, numb)
+		}
+		
+		if (base === 2 || base === 16) {
+			let numbs = numb.split('')
+			numbs = numbs.map(n => convertToBinary(n).padStart(3, 0))
+			
+			//turns into a string and removes the leading zeros
+			res = numbs.join('').replace(/^[0]*/, '')
+		}
+		
+		if (base === 16) {
+			res = binaryFor(16, res)
+		}
+		
+		return res
 	}
 	
 	return (
