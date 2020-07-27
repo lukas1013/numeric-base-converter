@@ -108,7 +108,8 @@ export default function App() {
 		const numbs = numb.toString().split('').reverse();
 			
 		for (let i = 0; i < numbs.length; i++) {
-			res = res + numbs[i] * base ** i;
+			const n = hexSymbols[numbs[i]] ?? numbs[i];
+			res = res + n * base ** i;
 		}
 		
 		return res
