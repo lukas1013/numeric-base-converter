@@ -44,6 +44,13 @@ module.exports = env => {
 							presets: ['@babel/preset-env', '@babel/preset-react'],
 							plugins: ['@babel/plugin-transform-runtime']
 						}
+					},
+					{
+						loader: 'eslint-loader',
+						options: {
+							cache: false,
+							failOnWarning: false
+						}
 					}
 				]
 			},
@@ -85,7 +92,7 @@ module.exports = env => {
 				console.log(`Linstening on port ${port}`);
 			},
 			hot: true,
-			stats: 'minimal',
+			//stats: 'normal',
 			open: true, //open browser
 			overlay: {
 				warnings: true,
