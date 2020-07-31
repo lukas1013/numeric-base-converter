@@ -4,6 +4,7 @@ const HtmlPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { SourceMapDevToolPlugin } = require('webpack');
 
 module.exports = env => {
 	const isProductionEnv = env.NODE_ENV === 'production'
@@ -11,28 +12,37 @@ module.exports = env => {
 	return {
 		mode: env.NODE_ENV,
 		entry: {
-			main: './src/index.js',
-			vendor: ['react', 'react-dom']
+			main: './src/index.js', /*default*/
 		},
 		output: {
 			filename: 'static/js/[name].[hash:8].js',
 			path: isProductionEnv ? __dirname + '/build' : undefined,
 			pathinfo: !isProductionEnv,
-			chunkFilename: 'static/js/[id].[contenthash:8].chunk.js'
+			chunkFilename: 'static/js/[id].[contenthash:8].chunk.js',
+			globalObject: 'this'
 		},
 		optimization: {
+			moduleIds: 'hashed',
 			splitChunks: {
-				chunks: 'all'
+				chunks: 'all',
+				name: !isProductionEnv,
+				cacheGroups: {
+					vendors: {
+						test: /[\\/]node_modules[\\/]/,
+						chunks: 'all'
+					}
+				}
 			},
-			runtimeChunk: {
-				name: entry => `runtime-${entry.name}`
-			},
+			runtimeChunk: 'single',
 			minimize: isProductionEnv,
 			minimizer: [
 				new TerserPlugin(),
 				new OptimizeCssAssetsPlugin()
-			]
+			],
+			mangleWasmImports: true,
+			noEmitOnErrors: true
 		},
+		devtool: false,
 		module: {
 			rules: [{
 				test: /\.js$/,
@@ -51,7 +61,8 @@ module.exports = env => {
 							cache: false,
 							failOnWarning: false
 						}
-					}
+					},
+					'source-map-loader'
 				]
 			},
 				{
@@ -60,20 +71,24 @@ module.exports = env => {
 				},
 				{
 					test: /\.css$/,
-					use: [{
+					use: [ isProductionEnv ? {
 						loader: MiniCssExtractPlugin.loader,
 						options: {
 							esModule: true,
 							hmr: !isProductionEnv,
 							reloadAll: true
 						}
-					},
+					} : 'style-loader',
 						'css-loader'
 					]
 				}]
 		},
 		plugins: [
 			new CleanWebpackPlugin(),
+			new SourceMapDevToolPlugin({
+				exclude: /node_modules/,
+				filename: '[file].map'
+			}),
 			new HtmlPlugin({
 				template: path.resolve(__dirname, 'public', 'index.html'),
 				filename: './index.html'
@@ -84,7 +99,7 @@ module.exports = env => {
 			})
 		],
 		devServer: {
-			contentBase: isProductionEnv ? path.resolve(__dirname, 'build') : path.resolve(__dirname, 'public'),
+			contentBase: path.resolve(__dirname, 'public'),
 			compress: true,
 			port: 3000,
 			onListening: server => {
@@ -92,10 +107,10 @@ module.exports = env => {
 				console.log(`Linstening on port ${port}`);
 			},
 			hot: true,
-			//stats: 'normal',
+			stats: 'errors-warnings',
 			open: true, //open browser
 			overlay: {
-				warnings: true,
+				warnings: false,
 				errors: true
 			},
 			watchContentBase: true
@@ -108,10 +123,6 @@ module.exports = env => {
 		watch: !isProductionEnv,
 		watchOptions: {
 			ignored: /node_modules/
-		},
-		stats: {
-			colors: true
 		}
-		//target: 'web'
 	}
 }
