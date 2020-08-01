@@ -3,12 +3,13 @@ const TerserPlugin = require('terser-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { SourceMapDevToolPlugin } = require('webpack');
 
 module.exports = env => {
 	const isProductionEnv = env.NODE_ENV === 'production'
-	
+
 	return {
 		mode: env.NODE_ENV,
 		entry: {
@@ -96,6 +97,14 @@ module.exports = env => {
 			new MiniCssExtractPlugin({
 				filename: 'static/css/[name].[contenthash:8].css',
 				chunkFilename: 'static/css/[id].[contenthash:8].chunk.css'
+			}),
+			new WorkboxPlugin.GenerateSW({
+				swDest: './service-worker.js', /*default*/
+				cleanupOutdatedCaches: true,
+				clientsClaim: true,
+				inlineWorkboxRuntime: false,
+				/*mode: env.NODE_ENV -- default*/
+				skipWaiting: true
 			})
 		],
 		devServer: {
