@@ -23,6 +23,7 @@
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^4.0.0",
+    "cssnano": "^4.1.10",
     "eslint": "^7.5.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-react": "^7.20.5",
@@ -31,6 +32,8 @@
     "html-webpack-plugin": "^4.3.0",
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.7.0",
     "source-map-loader": "^1.0.1",
     "style-loader": "^1.2.1",
     "terser-webpack-plugin": "^3.0.8",
@@ -38,5 +41,17 @@
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "workbox-webpack-plugin": "^5.1.3"
+  },
+  "browserslist": {
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version",
+      "last 1 ie version"
+    ],
+    "production": [
+      ">0.2%",
+      "not dead"
+    ]
   }
 }

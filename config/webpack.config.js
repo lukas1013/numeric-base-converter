@@ -81,7 +81,18 @@ module.exports = env => {
 							reloadAll: true
 						}
 					} : 'style-loader',
-						'css-loader'
+						{
+							loader: 'css-loader',
+							options: {
+								importLoaders: 1
+							}
+						},
+						{
+							loader: 'postcss-loader',
+							options: {
+								config: { path: path.resolve(__dirname) }
+							}
+						}
 					]
 				}]
 		},
