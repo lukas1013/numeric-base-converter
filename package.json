@@ -4,8 +4,8 @@
   "description": "A numeric base converter made with Reactjs",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --env.NODE_ENV=development",
-    "build": "webpack --env.NODE_ENV=production && serve -s ./build"
+    "start": "webpack-dev-server --config ./config/webpack.config.js --env.NODE_ENV=development",
+    "build": "webpack --config ./config/webpack.config.js --env.NODE_ENV=production && serve -s ./build"
   },
   "author": "",
   "license": "MIT",

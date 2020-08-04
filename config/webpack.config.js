@@ -12,12 +12,13 @@ module.exports = env => {
 
 	return {
 		mode: env.NODE_ENV,
+		context: path.resolve(__dirname, '..'),
 		entry: {
 			main: './src/index.js', /*default*/
 		},
 		output: {
 			filename: 'static/js/[name].[hash:8].js',
-			path: isProductionEnv ? __dirname + '/build' : undefined,
+			path: isProductionEnv ? path.resolve(__dirname, '..', 'build') : undefined,
 			pathinfo: !isProductionEnv,
 			chunkFilename: 'static/js/[id].[contenthash:8].chunk.js',
 			globalObject: 'this'
@@ -91,7 +92,7 @@ module.exports = env => {
 				filename: '[file].map'
 			}),
 			new HtmlPlugin({
-				template: path.resolve(__dirname, 'public', 'index.html'),
+				template: path.resolve(__dirname, '..', 'public', 'index.html'),
 				filename: './index.html'
 			}),
 			new MiniCssExtractPlugin({
@@ -108,7 +109,7 @@ module.exports = env => {
 			})
 		],
 		devServer: {
-			contentBase: path.resolve(__dirname, 'public'),
+			contentBase: path.resolve(__dirname, '..', 'public'),
 			compress: true,
 			port: 3000,
 			onListening: server => {
