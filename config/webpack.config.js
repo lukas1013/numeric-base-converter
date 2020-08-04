@@ -38,7 +38,9 @@ module.exports = env => {
 			runtimeChunk: 'single',
 			minimize: isProductionEnv,
 			minimizer: [
-				new TerserPlugin(),
+				new TerserPlugin({
+					sourceMap: true
+				}),
 				new OptimizeCssAssetsPlugin()
 			],
 			mangleWasmImports: true,
@@ -103,8 +105,9 @@ module.exports = env => {
 				filename: '[file].map'
 			}),
 			new HtmlPlugin({
+				favicon: path.resolve(__dirname, '..','public','assets','favicon.ico'),
 				template: path.resolve(__dirname, '..', 'public', 'index.html'),
-				filename: './index.html'
+				filename: 'index.html'
 			}),
 			new MiniCssExtractPlugin({
 				filename: 'static/css/[name].[contenthash:8].css',
@@ -141,9 +144,6 @@ module.exports = env => {
 			extensions: ['.js'],
 			symlinks: false
 		},
-		watch: !isProductionEnv,
-		watchOptions: {
-			ignored: /node_modules/
-		}
+		watch: true
 	}
 }
