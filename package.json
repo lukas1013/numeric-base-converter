@@ -5,12 +5,13 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --config ./config/webpack.config.js --env.NODE_ENV=development",
-    "build": "webpack --config ./config/webpack.config.js --env.NODE_ENV=production && serve -s ./build"
+    "build": "webpack --config ./config/webpack.config.js --env.NODE_ENV=production && node server.js"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7.10.5",
+    "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
