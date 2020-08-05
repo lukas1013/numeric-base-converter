@@ -1,8 +1,11 @@
 :root{
-	--binaryColor: #F62217;
+	--binaryColor: #EB043E;
 	--decimalColor: #FDD017;
-	--octalColor: #306EFF;
-	--hexColor: #4CC417;
+	--octalColor: #0C8FF5;
+	--hexadecimalColor: #4CC417;
+
+	--white: #ede6f7;
+	--black: #120c21;
 }
 
 html,
@@ -13,6 +16,7 @@ body{
 	height: 100%;
 	font-size: 62.5%;
 	overflow: scroll;
+	background-color: var(--white);
 }
 
 #root{
@@ -24,7 +28,7 @@ body{
 
 header{
 	color: white;
-	background-color: #000;
+	background-color: var(--black);
 	padding: 2%;
 	width: 100%;
 	align-self: flex-start;
@@ -34,7 +38,7 @@ header{
 h1{
 	margin: 1% 0;
 	text-align: center;
-	font-size: 3em;
+	font-size: 2.8em;
 }
 
 main.container{
@@ -64,6 +68,20 @@ input{
 	background-color: rgba(0,0,0,.1);
 }
 
+button{
+	background-color: transparent;
+	border-radius: 1.4vw;
+	outline: none;
+	width: 60%;
+	user-select: none;
+	-moz-user-select: -moz-none;
+	transition: all .2s;
+	box-shadow: 0 1px 4px rgba(0,0,0,.4);
+	border: none;
+	color: #fff;
+	text-shadow: 0 0 3px rgba(0,0,0,.4);
+}
+
 #convert{
 	width: 70%;
 	grid-row: span 2;
@@ -72,6 +90,16 @@ input{
 	padding: 2%;
 	border: none;
 	border-radius: 1.4vw;
+	background-color: #7d3ae0;
+	color: var(--white);
+	font-weight: bold;
+	text-shadow: none;
+}
+
+#convert:hover{
+	box-shadow: none;
+	background-color: var(--white);
+	color: #7d3ae0;
 }
 
 footer{
