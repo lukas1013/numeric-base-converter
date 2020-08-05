@@ -4,12 +4,13 @@ const HtmlPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
+const PWAManifestPlugin = require('webpack-pwa-manifest');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { SourceMapDevToolPlugin } = require('webpack');
 
 module.exports = env => {
 	const isProductionEnv = env.NODE_ENV === 'production'
-
+	
 	return {
 		mode: env.NODE_ENV,
 		context: path.resolve(__dirname, '..'),
@@ -120,6 +121,45 @@ module.exports = env => {
 				inlineWorkboxRuntime: false,
 				/*mode: env.NODE_ENV -- default*/
 				skipWaiting: true
+			}),
+			new PWAManifestPlugin({
+				filename: 'manifest.webmanifest',
+				inject: true,
+				includeDirectory: true,
+				fingerprints: false,
+				crossorigin: 'use-credentials',
+				short_name: 'Base Converter',
+				name: 'Numeric Base Converter',
+				description: 'A simple numeric base converter made with Reactjs',
+				icons: [
+					{
+						src: path.resolve(__dirname, '..', 'public', 'assets', 'icon-192x192.png'),
+						size: 192,
+						purpose: 'maskable'
+					},
+					{
+						src: path.resolve(__dirname, '..', 'public', 'assets', 'icon-192x192.png'),
+						size: 192
+					},
+					{
+						src: path.resolve(__dirname, '..', 'public', 'assets', 'icon-512x512.png'),
+						size: 512
+					},
+					{
+						src: path.resolve(__dirname, '..', 'public', 'assets', 'apple-touch-icon.png'),
+						size: 180,
+						ios: true
+					},
+					{
+						src: path.resolve(__dirname, '..', 'public', 'assets' , 'apple-touch-icon.png'),
+						size: 180,
+						ios: 'startup'
+					}
+				],
+				start_url: '/',
+				background_color: '#000',
+				display: 'standalone',
+				theme_color: '#141314'
 			})
 		],
 		devServer: {
@@ -144,6 +184,6 @@ module.exports = env => {
 			extensions: ['.js'],
 			symlinks: false
 		},
-		watch: true
+		watch: !isProductionEnv
 	}
 }
