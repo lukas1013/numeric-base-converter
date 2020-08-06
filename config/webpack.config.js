@@ -108,7 +108,13 @@ module.exports = env => {
 			new HtmlPlugin({
 				favicon: path.resolve(__dirname, '..','public','assets','favicon.ico'),
 				template: path.resolve(__dirname, '..', 'public', 'index.html'),
-				filename: 'index.html'
+				filename: 'index.html',
+				meta: {
+					description: 'Simple numeric base converter',
+					keywords: 'binary, decimal, octal, hexadecimal, base converter, binary for',
+					robots: 'index',
+					'google-site-verification': 'PyQi_D6ygp3AESCJbPHoFAV3zFukiTqQtqUu7ygkcxQ'
+				}
 			}),
 			new MiniCssExtractPlugin({
 				filename: 'static/css/[name].[contenthash:8].css',
