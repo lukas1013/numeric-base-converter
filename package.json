@@ -5,8 +5,7 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --config ./config/webpack.config.js --env.NODE_ENV=development",
-    "start-server": "node ./server.js",
-    "build": "webpack --config ./config/webpack.config.js --env.NODE_ENV=production && npm run start-server"
+    "build": "webpack --config ./config/webpack.config.js --env.NODE_ENV=production"
   },
   "author": "",
   "license": "MIT",
