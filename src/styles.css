@@ -23,6 +23,7 @@ body{
 	width: 100%;
 	height: 100%;
 	display: flex;
+	font-size: 4vw;
 	flex-direction: column;
 }
 
@@ -38,7 +39,7 @@ header{
 h1{
 	margin: 1% 0;
 	text-align: center;
-	font-size: 2.8em;
+	font-size: 1.2em;
 }
 
 main.container{
@@ -93,6 +94,8 @@ button{
 	box-shadow: 0 1px 4px rgba(0,0,0,.4);
 	border: none;
 	color: #fff;
+	font-size: .9em;
+	padding: 2%;
 	text-shadow: 0 0 3px rgba(0,0,0,.4);
 }
 
@@ -116,6 +119,13 @@ button{
 	color: #7d3ae0;
 }
 
-footer{
+@media only screen and (orientation: landscape) {
+	#root{
+		font-size: 4vh;
+	}
 	
+	input,
+	button{
+		border-radius: 1.4vh;
+	}
 }
