@@ -68,6 +68,20 @@ input{
 	background-color: rgba(0,0,0,.1);
 }
 
+span{
+	color: red;
+	font-size: 1.2rem;
+	grid-row: 2 / span 1;
+}
+
+#base1-mismatch{
+	grid-column: 1 / span 1;
+}
+
+#base2-mismatch{
+	grid-column: 2 / span 1;
+}
+
 button{
 	background-color: transparent;
 	border-radius: 1.4vw;
