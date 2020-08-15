@@ -39,7 +39,7 @@ function convertToDecimal(base, numb) {
 	const numbs = numb.toString().split('').reverse();
 		
 	for (let i = 0; i < numbs.length; i++) {
-		const n = hexSymbols[numbs[i]] ?? numbs[i];
+		const n = hexSymbols[numbs[i].toUpperCase()] ?? numbs[i];
 		res = res + n * base ** i;
 	}
 	
@@ -119,7 +119,7 @@ function octalFor(base, numb) {
 
 function hexadecimalFor(base, numb) {
 	let res;
-	const numbs = numb.split('').map(n => hexSymbols[n] ?? n)
+	const numbs = numb.split('').map(n => hexSymbols[n.toUpperCase()] ?? n)
 
 	if (base === 2 || base === 8) {
 		const binaries = numbs.map(n => convertToBinary(n).padStart(4, 0))
